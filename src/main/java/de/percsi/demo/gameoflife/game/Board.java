@@ -17,7 +17,22 @@ public class Board {
   }
 
   public Board getNextGenerationBoard() {
-    return new Board(HashSet.ofAll(positions.map(position -> position.getNeighbours()).flatMap(pos->pos)));
+    return new Board(HashSet.ofAll(this.positions.map(position -> position.getNeighbours().map(this::correct))
+          .flatMap(pos->pos)).filter(this::willBeAlive));
   }
 
+  private boolean willBeAlive(Position position) {
+    int n = position.getNeighbours().map(this::correct).count(this.positions::contains);
+    return ( n == 3  || (n == 2 && isAlive(position)));
+  }
+
+  private boolean isAlive(Position position) {
+    return this.positions.contains(position);
+  }
+
+
+  private Position correct(Position position) {
+    return new Position(position.getX() < 0 ? MAX_WIDTH - 1 : (position.getX() > MAX_WIDTH - 1) ? 0 : position.getX(),
+                (position.getY() < 0) ? MAX_HEIGHT -1 : (position.getY() > MAX_HEIGHT - 1) ? 0 : position.getY());
+  }
 }
