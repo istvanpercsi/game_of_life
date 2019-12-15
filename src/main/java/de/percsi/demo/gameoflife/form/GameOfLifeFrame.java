@@ -32,6 +32,8 @@ public class GameOfLifeFrame extends JFrame implements ActionListener, ItemListe
     JMenu patterns = new JMenu("Patterns");
     JMenu spaceships = new JMenu("Spaceships");
     patterns.add(spaceships);
+    JMenu oscillators = new JMenu("Oscillators");
+    patterns.add(oscillators);
     //Glider menu
     JMenuItem glider = new JMenuItem(GameOfLifePatterns.GLIDER.getName());
     spaceships.add(glider);
@@ -46,7 +48,12 @@ public class GameOfLifeFrame extends JFrame implements ActionListener, ItemListe
     JMenuItem mwss = new JMenuItem(GameOfLifePatterns.MWSS.getName());
     spaceships.add(mwss);
     mwss.addActionListener(this);
-    
+
+    //Blinker
+    JMenuItem blinker = new JMenuItem(GameOfLifePatterns.BLINKER.getName());
+    oscillators.add(blinker);
+    blinker.addActionListener(this);
+
     this.mainMenu.add(patterns);
   }
 
@@ -60,6 +67,8 @@ public class GameOfLifeFrame extends JFrame implements ActionListener, ItemListe
       this.setFields(GameOfLifePatterns.LWSS.getPositions(5,5));
     } else if (menuItem.getText().equals(GameOfLifePatterns.MWSS.getName())) {
       this.setFields(GameOfLifePatterns.MWSS.getPositions(4,4));
+    } else if (menuItem.getText().equals(GameOfLifePatterns.BLINKER.getName())) {
+      this.setFields(GameOfLifePatterns.BLINKER.getPositions(24,24));
     }
   }
   @Override
