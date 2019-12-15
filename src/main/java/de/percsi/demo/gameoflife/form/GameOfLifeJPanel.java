@@ -2,6 +2,7 @@ package de.percsi.demo.gameoflife.form;
 
 import de.percsi.demo.gameoflife.game.Board;
 import de.percsi.demo.gameoflife.game.Position;
+import io.vavr.collection.HashSet;
 import io.vavr.collection.Set;
 import io.vavr.collection.Stream;
 
@@ -10,11 +11,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PlayBoard extends JPanel implements ActionListener {
+public class GameOfLifeJPanel extends JPanel implements ActionListener {
 
-  private Board board;
+  private Board board = new Board(HashSet.empty());
 
-  private Timer timer = new Timer(300, this);
+  private Timer timer = new Timer(200, this);
 
   @Override
   protected void paintComponent(Graphics g) {
